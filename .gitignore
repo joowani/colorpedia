@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Intellij
+.idea/
+
+# setuptools-scm
+colorpedia/version.py
