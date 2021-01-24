@@ -38,6 +38,11 @@ Restart your shell to use the `color` command:
 color --help
 ```
 
+If you have a name collision on Windows, you can use `colorpedia` instead:
+```shell
+colorpedia --help
+```
+
 ### Usage
 
 Look up colors using various color models:
