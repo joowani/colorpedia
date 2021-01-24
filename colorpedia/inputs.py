@@ -42,6 +42,8 @@ def normalize_degree_angle(value: Union[float, int]) -> float:
 
 
 def normalize_hex_code(value: str) -> str:
+    if isinstance(value, int):
+        value = str(value)
     if isinstance(value, str) and re.search(HEX_REGEX, value):
         return value if len(value) == 6 else "".join(c * 2 for c in value)
     raise InputValueError("hex code", f"a string matching {HEX_REGEX}")
