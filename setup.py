@@ -3,10 +3,8 @@ from setuptools import find_packages, setup
 with open("README.md") as fp:
     description = fp.read()
 
-
 setup(
     name="colorpedia",
-    license="MIT",
     description="Command-line tool for looking up colors",
     long_description=description,
     long_description_content_type="text/markdown",
@@ -16,9 +14,11 @@ setup(
     packages=find_packages(exclude=["tests"]),
     include_package_data=True,
     python_requires=">=3.6",
+    license="MIT",
     use_scm_version=True,
     setup_requires=["setuptools_scm"],
     install_requires=[
+        "dataclasses",
         "fire>=0.3.1",
         "setuptools>=42",
         "setuptools_scm[toml]>=3.4",
@@ -29,6 +29,7 @@ setup(
             "flake8",
             "isort>=5.0.0",
             "mypy",
+            "pre-commit",
             "pytest>=6.0.0",
             "pytest-cov>=2.0.0",
         ],

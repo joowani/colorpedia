@@ -24,9 +24,9 @@ def validate_shades_count(value: Union[bool, int]) -> int:
 
 
 def validate_editor(value: Optional[str]):
-    if value is None or (type(value) == str and len(value.split()) == 1):
+    if value is None or (type(value) == str and len(value) > 0 and " " not in value):
         return value
-    raise InputValueError("editor", "a shell-executable command without args")
+    raise InputValueError("editor", "a shell-executable command without whitespaces")
 
 
 def validate_rgb_value(value: int) -> int:

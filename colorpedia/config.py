@@ -26,7 +26,7 @@ LIST_VIEW_COLOR_WIDTH = 20
 @dataclass
 class Config:
     always_output_json: bool = False
-    approx_name_suffix: str = " (approx)"
+    approx_name_suffix: str = "~"
     default_shades_count: int = DEFAULT_SHADES_COUNT
     display_degree_symbol: bool = False
     display_percent_symbol: bool = False

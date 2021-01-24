@@ -38,7 +38,7 @@ def test_validate_editor_flag_bad_arg(bad_arg):
         validate_editor(bad_arg)
     assert (
         str(err.value)
-        == "Bad editor (expecting a shell-executable command without args)"
+        == "Bad editor (expecting a shell-executable command without whitespaces)"
     )
 
 

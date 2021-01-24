@@ -5,7 +5,7 @@ Command-line tool for quickly looking up colors, shades and palettes.
 Supported [color models](https://en.wikipedia.org/wiki/Color_model):
 HEX, RGB, HSL, HSV, CMYK
 
-![](example.gif)
+![](demo.gif)
 
 ![Build](https://github.com/joowani/colorpedia/workflows/Build/badge.svg?branch=main)
 ![CodeQL](https://github.com/joowani/colorpedia/workflows/CodeQL/badge.svg)
@@ -103,8 +103,8 @@ The command above creates `~/.config/colorpedia/config.json` with default settin
 {
   // Always display in JSON format. Use with --nojson flag.
   "always_output_json": false,
-  // Suffix for approximate color names (e.g. "green (approx)").
-  "approx_name_suffix": " (approx)",
+  // Suffix for approximate color names (e.g. "green~").
+  "approx_name_suffix": "~",
   // Default number of shades displayed when --shades is used without a count.
   "default_shades_count": 15,
   // Display degrees angle (°) symbol. Use with --nounits flag.
@@ -164,15 +164,30 @@ color rgb --help
 color palette --help
 ```
 
-
 ### Technical Notes
 - Names of "unknown" colors are approximated using minimum RGB delta:
   ```
   delta = (R1 - R2) ^ 2 + (G1 - G2) ^ 2 + (B1 - B2) ^ 2
   ```
-  If there is are ties, all names are included in the output using `/` delimiter.
+  If there is are ties, all names are included in the output.
 - Percentage values use 0 - 100 scale by default, 0 - 1 scale in JSON.
 - Degree angles use 0 - 360 scale by default, 0 - 1 scale in JSON.
 - Percent and degree unit symbols are omitted in JSON.
 - If HSV/HSL/CMYK values do not map exactly to an RGB triplet, they are
   rounded to the nearest one.
+
+
+### Contributing
+
+To set up dev environment:
+
+```shell
+cd ~/your/colorpedia/clone  # Activate venv if you have one
+pip install -e .[dev]       # Install dev dependencies (black, mypy, pre-commit etc.)
+pre-commit install          # Install git pre-commit hooks
+```
+
+To run unit tests:
+```shell
+py.test
+```

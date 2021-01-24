@@ -140,7 +140,7 @@ def test_format_rgb_with_units(r, g, b, expected):
 
 
 def test_format_name():
-    assert format_name(default_config, "foo", False) == "foo (approx)"
+    assert format_name(default_config, "foo", False) == "foo~"
     assert format_name(default_config, "foo", True) == "foo"
     assert format_name(custom_config, "foo", False) == "foo*"
     assert format_name(custom_config, "foo", True) == "foo"
