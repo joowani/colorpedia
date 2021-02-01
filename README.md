@@ -1,6 +1,6 @@
 ## Colorpedia
 
-Command-line tool for quickly looking up colors, shades and palettes.
+Command-line tool for looking up colors, shades and palettes.
 
 Supported [color models](https://en.wikipedia.org/wiki/Color_model):
 HEX, RGB, HSL, HSV, CMYK
@@ -10,7 +10,6 @@ HEX, RGB, HSL, HSV, CMYK
 ![Build](https://github.com/joowani/colorpedia/workflows/Build/badge.svg?branch=main)
 ![CodeQL](https://github.com/joowani/colorpedia/workflows/CodeQL/badge.svg)
 [![Codecov](https://codecov.io/gh/joowani/colorpedia/branch/main/graph/badge.svg?token=EH6F62KWTB)](https://codecov.io/gh/joowani/colorpedia)
-
 
 ### Requirements
 
@@ -26,19 +25,14 @@ Install via [pip](https://pip.pypa.io):
 pip install colorpedia
 ```
 
-Add the following line in .bashrc for autocompletion (only bash supported):
-
-```shell
-source <(color -- --completion)
-```
-
-Restart your shell to use the `color` command:
+The `color` command should now be accessible:
 
 ```shell
 color --help
 ```
 
-If you have a name collision on Windows, you can use `colorpedia` instead:
+If you have a name collision on Windows, use `colorpedia` instead:
+
 ```shell
 colorpedia --help
 ```
@@ -56,7 +50,7 @@ color hsv 360 100 100       # HSV (Hue Saturation Brightness)
 color cmyk 100 100 100 100  # CMYK (Cyan Magenta Yellow Black)
 ```
 
-Use `--shades` to display shades of a color (dark to light):
+Use `--shades` to display dark to light shades of a color:
 
 ```shell
 color name green --shades    # Display 15 colors by default
@@ -67,12 +61,11 @@ Look up color palettes:
 
 ```shell
 color palette molokai
-color palette zenburn
 color palette blue
 color palette kelly
 ```
 
-Control the output with global flags:
+Control output with global flags:
 
 ```shell
 color name yellow --all      # Display all details
@@ -88,6 +81,33 @@ Combine with other tools like [jq](https://github.com/stedolan/jq):
 color palette molokai | cut -d'|' -f 2,3,4
 color name blue --range --json | jq .[0].name
 ```
+
+Use `--help` to display more information on each subcommand:
+
+```shell
+color name --help
+color rgb --help
+color palette --help
+```
+
+### Tab Completion
+
+For Bash, add the following line in `~/.bashrc`:
+
+```shell
+source <(color -- --completion)
+```
+
+For Zsh, add the following lines in `~/.zshrc`:
+
+```shell
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+
+source <(color -- --completion | sed "s/:/: /g")
+```
+
+Replace `color` with `colorpedia` if you choose to use the longer command.
 
 ### Configuration
 
@@ -117,54 +137,50 @@ The command above creates `~/.config/colorpedia/config.json` with default settin
   "get_view_color_width": 20,
   // Keys displayed in single-color (get) view.
   "get_view_keys": [
-    "rgb",
-    "cmyk",
-    "hex",
     "name",
+    "hex",
+    "rgb",
     "color",
     "hsl",
-    "hsv"
+    "hsv",
+    "cmyk"
   ],
   // Keys displayed in JSON view.
   "json_keys": [
-    "rgb",
-    "cmyk",
-    "hex",
-    "is_name_exact",
     "name",
+    "is_name_exact",
+    "hex",
+    "rgb",
     "hsl",
-    "hsv"
+    "hsv",
+    "cmyk"
   ],
   // Width of the color box displayed in multi-color (list) view.
   "list_view_color_width": 20,
   // Keys displayed in multi-color (list) view.
   "list_view_keys": [
-    "rgb",
-    "hex",
     "name",
+    "hex",
+    "rgb",
     "color",
-    "hsv"
+    "hsl",
+    "hsv",
+    "cmyk"
   ],
   // Always uppercase hex codes if set to true, lowercase if set to false.
   "uppercase_hex_codes": true
 }
 ```
 
-Handy shortcuts to view and edit the configuration file:
+Display or edit the configuration file:
 
 ```shell
 color config show  # Display configuration
 color config edit  # Edit configuration via a text editor
 ```
 
-Use `--help` to see more information on each subcommand:
-```shell
-color config --help
-color rgb --help
-color palette --help
-```
-
 ### Technical Notes
+
 - Names of "unknown" colors are approximated using minimum RGB delta:
   ```
   delta = (R1 - R2) ^ 2 + (G1 - G2) ^ 2 + (B1 - B2) ^ 2
@@ -173,21 +189,21 @@ color palette --help
 - Percentage values use 0 - 100 scale by default, 0 - 1 scale in JSON.
 - Degree angles use 0 - 360 scale by default, 0 - 1 scale in JSON.
 - Percent and degree unit symbols are omitted in JSON.
-- If HSV/HSL/CMYK values do not map exactly to an RGB triplet, they are
-  rounded to the nearest one.
-
+- If HSV/HSL/CMYK values do not map exactly to an RGB triplet, they are rounded to the
+  nearest one.
 
 ### Contributing
 
-To set up dev environment:
+Set up dev environment:
 
 ```shell
-cd ~/your/colorpedia/clone  # Activate venv if you have one
+cd ~/your/colorpedia/clone  # Activate venv if you have one (recommended)
 pip install -e .[dev]       # Install dev dependencies (black, mypy, pre-commit etc.)
 pre-commit install          # Install git pre-commit hooks
 ```
 
-To run unit tests:
+Run unit tests with coverage:
+
 ```shell
-py.test
+py.test --cov=colorpedia --cov-report=html
 ```

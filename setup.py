@@ -11,6 +11,7 @@ setup(
     author="Joohwan Oh",
     author_email="joohwan.oh@outlook.com",
     url="https://github.com/joowani/colorpedia",
+    keywords=["cli", "color", "terminal"],
     packages=find_packages(exclude=["tests"]),
     include_package_data=True,
     python_requires=">=3.6",
@@ -36,8 +37,8 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "color = colorpedia.cli:entry_point",
-            "colorpedia = colorpedia.cli:entry_point",
+            "color = colorpedia.cli:entry_point_color",
+            "colorpedia = colorpedia.cli:entry_point_colorpedia",
         ],
     },
     classifiers=[

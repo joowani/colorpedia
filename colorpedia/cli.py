@@ -439,14 +439,12 @@ class ConfigSubCommand(dict):
     """Manage CLI configuration."""
 
 
-def entry_point():
+def entry_point(name: str):
     try:
         # We need this to get colors working on windows.
         os.system("")
-
-        # We define these classes
         Fire(
-            name="color",
+            name=name,
             component=MainCommand(
                 {
                     "version": get_version,
@@ -479,3 +477,11 @@ def entry_point():
     except ColorpediaError as err:
         sys.stderr.write(f"{err}\n")
         sys.exit(1)
+
+
+def entry_point_color():
+    entry_point("color")
+
+
+def entry_point_colorpedia():
+    entry_point("colorpedia")
