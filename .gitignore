@@ -131,5 +131,5 @@ dmypy.json
 # Intellij
 .idea/
 
-# setuptools-scm
+# setuptools_scm
 colorpedia/version.py

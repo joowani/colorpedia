@@ -25,7 +25,13 @@ Install via [pip](https://pip.pypa.io):
 pip install colorpedia
 ```
 
-The `color` command should now be accessible:
+For conda users:
+
+```shell
+conda install colorpedia -c conda-forge
+```
+
+After installation you can use the `color` command:
 
 ```shell
 color --help
