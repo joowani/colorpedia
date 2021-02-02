@@ -1,5 +1,7 @@
 name: Build
 on:
+  workflow_dispatch:
+    inputs:
   push:
     branches: [ main, dev ]
   pull_request:
