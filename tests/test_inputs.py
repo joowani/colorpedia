@@ -122,14 +122,25 @@ def test_normalize_degree_angle_bad_arg(bad_arg):
 
 @pytest.mark.parametrize(
     ("arg", "expected"),
-    (("ABC", "AABBCC"), ("ABCDEF", "ABCDEF"), ("FFFFFF", "FFFFFF"), (212121, "212121")),
+    (
+        ("ABC", "AABBCC"),
+        ("ABCDEF", "ABCDEF"),
+        ("FFFFFF", "FFFFFF"),
+        ("100", "110000"),
+        ("010", "001100"),
+        ("001", "000011"),
+        (212121, "212121"),
+        (100, "110000"),
+        (0, "000000"),
+    ),
 )
 def test_normalize_hex_code(arg, expected):
     assert normalize_hex_code(arg) == expected
 
 
 @pytest.mark.parametrize(
-    "bad_arg", ("", "F", "FFFFFH", "#FFFFFF", 212121.0, True, False, max, None, [])
+    "bad_arg",
+    ("", "F", "FFFFFH", "#FFFFFF", 212121.0, True, False, max, None, [], 1, 11),
 )
 def test_normalize_hex_code_bad_arg(bad_arg):
     with pytest.raises(InputValueError) as err:
