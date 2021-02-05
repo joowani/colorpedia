@@ -1,4 +1,11 @@
-## Colorpedia
+# Colorpedia
+
+![Build](https://github.com/joowani/colorpedia/workflows/Build/badge.svg?branch=main)
+![CodeQL](https://github.com/joowani/colorpedia/workflows/CodeQL/badge.svg)
+[![Codecov](https://codecov.io/gh/joowani/colorpedia/branch/main/graph/badge.svg?token=EH6F62KWTB)](https://codecov.io/gh/joowani/colorpedia)
+[![PyPI version](https://badge.fury.io/py/colorpedia.svg)](https://badge.fury.io/py/colorpedia)
+[![GitHub license](https://img.shields.io/github/license/joowani/colorpedia?color=brightgreen)](https://github.com/joowani/colorpedia/blob/main/LICENSE)
+![Python version](https://img.shields.io/badge/python-3.6%2B-blue)
 
 Command-line tool for looking up colors, shades and palettes.
 
@@ -7,17 +14,13 @@ HEX, RGB, HSL, HSV, CMYK
 
 ![](demo.gif)
 
-![Build](https://github.com/joowani/colorpedia/workflows/Build/badge.svg?branch=main)
-![CodeQL](https://github.com/joowani/colorpedia/workflows/CodeQL/badge.svg)
-[![Codecov](https://codecov.io/gh/joowani/colorpedia/branch/main/graph/badge.svg?token=EH6F62KWTB)](https://codecov.io/gh/joowani/colorpedia)
-
-### Requirements
+## Requirements
 
 * Modern terminal with true color and utf-8 support
   (e.g. Windows Terminal, PowerShell, iTerm2, Terminator)
 * Python 3.6+
 
-### Installation
+## Installation
 
 Install via [pip](https://pip.pypa.io):
 
@@ -25,7 +28,7 @@ Install via [pip](https://pip.pypa.io):
 pip install colorpedia
 ```
 
-For conda users:
+For [conda](https://docs.conda.io) users:
 
 ```shell
 conda install colorpedia -c conda-forge
@@ -43,7 +46,7 @@ If you have a name collision on Windows, use `colorpedia` instead:
 colorpedia --help
 ```
 
-### Usage
+## Usage
 
 Look up colors using various color models:
 
@@ -96,7 +99,7 @@ color rgb --help
 color palette --help
 ```
 
-### Tab Completion
+## Tab Completion
 
 For Bash, add the following line in `~/.bashrc`:
 
@@ -115,7 +118,7 @@ source <(color -- --completion | sed "s/:/: /g")
 
 Replace `color` with `colorpedia` if you choose to use the longer command.
 
-### Configuration
+## Configuration
 
 Initialize the config file to customize CLI behavior:
 
@@ -185,7 +188,7 @@ color config show  # Display configuration
 color config edit  # Edit configuration via a text editor
 ```
 
-### Technical Notes
+## Technical Notes
 
 - Names of "unknown" colors are approximated using minimum RGB delta:
   ```
@@ -198,7 +201,7 @@ color config edit  # Edit configuration via a text editor
 - If HSV/HSL/CMYK values do not map exactly to an RGB triplet, they are rounded to the
   nearest one.
 
-### Contributing
+## Contributing
 
 Set up dev environment:
 
