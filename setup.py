@@ -1,11 +1,11 @@
 from setuptools import find_packages, setup
 
-with open("README.md") as fp:
+with open("docs/README.md") as fp:
     description = fp.read()
 
 setup(
     name="colorpedia",
-    description="Command-line tool for looking up colors",
+    description="CLI for color lookups",
     long_description=description,
     long_description_content_type="text/markdown",
     author="Joohwan Oh",
@@ -27,10 +27,11 @@ setup(
     extras_require={
         "dev": [
             "black",
-            "flake8",
+            "flake8>=3.8.4",
             "isort>=5.0.0",
-            "mypy",
-            "pre-commit",
+            "mkdocs-material",
+            "mypy>=0.790",
+            "pre-commit>=2.9.3",
             "pytest>=6.0.0",
             "pytest-cov>=2.0.0",
         ],

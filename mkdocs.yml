@@ -1,0 +1,28 @@
+site_name: Colorpedia
+site_description: Colorpedia Documentation
+site_author: Joohwan Oh
+repo_name: joowani/colorpedia
+repo_url: https://github.com/joowani/colorpedia
+copyright: Copyright &copy; 2021 Joohwan Oh
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - toc:
+      permalink: true
+
+nav:
+  - Overview: README.md
+  - Contributing: CONTRIBUTING.md
+
+theme:
+  name: material
+  features:
+    - navigation.expand
+    - navigation.instant
+  font: false
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    primary: teal

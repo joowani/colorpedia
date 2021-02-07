@@ -1,2 +1,2 @@
-include README.md LICENSE
+include README.md LICENSE demo.gif
 prune tests

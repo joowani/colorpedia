@@ -1,18 +1,17 @@
 # Colorpedia
 
+**Colorpedia** is a command-line tool for looking up colors, shades and palettes.
+
+Supported [color models](https://en.wikipedia.org/wiki/Color_model):
+HEX, RGB, HSL, HSV, CMYK.
+
+![Demo GIF](https://raw.githubusercontent.com/joowani/colorpedia/main/demo.gif)
 ![Build](https://github.com/joowani/colorpedia/workflows/Build/badge.svg?branch=main)
 ![CodeQL](https://github.com/joowani/colorpedia/workflows/CodeQL/badge.svg)
 [![Codecov](https://codecov.io/gh/joowani/colorpedia/branch/main/graph/badge.svg?token=EH6F62KWTB)](https://codecov.io/gh/joowani/colorpedia)
 [![PyPI version](https://badge.fury.io/py/colorpedia.svg)](https://badge.fury.io/py/colorpedia)
 [![GitHub license](https://img.shields.io/github/license/joowani/colorpedia?color=brightgreen)](https://github.com/joowani/colorpedia/blob/main/LICENSE)
 ![Python version](https://img.shields.io/badge/python-3.6%2B-blue)
-
-Command-line tool for looking up colors, shades and palettes.
-
-Supported [color models](https://en.wikipedia.org/wiki/Color_model):
-HEX, RGB, HSL, HSV, CMYK
-
-![](demo.gif)
 
 ## Requirements
 
@@ -34,7 +33,7 @@ For [conda](https://docs.conda.io) users:
 conda install colorpedia -c conda-forge
 ```
 
-After installation you can use the `color` command:
+You can then use the `color` command:
 
 ```shell
 color --help
@@ -59,7 +58,7 @@ color hsv 360 100 100       # HSV (Hue Saturation Brightness)
 color cmyk 100 100 100 100  # CMYK (Cyan Magenta Yellow Black)
 ```
 
-Use `--shades` to display dark to light shades of a color:
+Use `--shades` to display shades of a color:
 
 ```shell
 color name green --shades    # Display 15 colors by default
@@ -70,11 +69,11 @@ Look up color palettes:
 
 ```shell
 color palette molokai
-color palette blue
-color palette kelly
+color palette facebook
+color palette zenburn
 ```
 
-Control output with global flags:
+Control the output with global flags:
 
 ```shell
 color name yellow --all      # Display all details
@@ -84,7 +83,7 @@ color name yellow --nojson   # Do not display in JSON
 color name yellow --nounits  # Do not display unit symbols
 ```
 
-Combine with other tools like [jq](https://github.com/stedolan/jq):
+Combine with other command-line tools like [jq](https://github.com/stedolan/jq):
 
 ```shell
 color palette molokai | cut -d'|' -f 2,3,4
@@ -101,7 +100,7 @@ color palette --help
 
 ## Tab Completion
 
-For Bash, add the following line in `~/.bashrc`:
+For Bash, add the following line in `~/.bashrc` or `~/.bash_profile`:
 
 ```shell
 source <(color -- --completion)
@@ -116,11 +115,11 @@ autoload -U +X bashcompinit && bashcompinit
 source <(color -- --completion | sed "s/:/: /g")
 ```
 
-Replace `color` with `colorpedia` if you choose to use the longer command.
+Replace `color` with `colorpedia` if you are using the latter.
 
 ## Configuration
 
-Initialize the config file to customize CLI behavior:
+Initialize the configuration file to customize CLI behavior:
 
 ```shell
 color config init
@@ -128,54 +127,41 @@ color config init
 
 The command above creates `~/.config/colorpedia/config.json` with default settings:
 
-```json5
+```javascript
 {
-  // Always display in JSON format. Use with --nojson flag.
+  // Always display in JSON format. Use with --nojson global flag.
   "always_output_json": false,
+  
   // Suffix for approximate color names (e.g. "green~").
   "approx_name_suffix": "~",
+  
   // Default number of shades displayed when --shades is used without a count.
   "default_shades_count": 15,
-  // Display degrees angle (°) symbol. Use with --nounits flag.
+  
+  // Display degrees angle (°) symbol. Use with --nounits global flag.
   "display_degree_symbol": false,
-  // Display percentage (%) symbol. Use with --nounits flag.
+  
+  // Display percentage (%) symbol. Use with --nounits global flag.
   "display_percent_symbol": false,
+  
   // Height of the color box displayed in single-color (get) view.
   "get_view_color_height": 10,
+  
   // Width of the color box displayed in single-color (get) view.
   "get_view_color_width": 20,
+  
   // Keys displayed in single-color (get) view.
-  "get_view_keys": [
-    "name",
-    "hex",
-    "rgb",
-    "color",
-    "hsl",
-    "hsv",
-    "cmyk"
-  ],
+  "get_view_keys": ["name", "hex", "rgb", "color", "hsl", "hsv", "cmyk"],
+  
   // Keys displayed in JSON view.
-  "json_keys": [
-    "name",
-    "is_name_exact",
-    "hex",
-    "rgb",
-    "hsl",
-    "hsv",
-    "cmyk"
-  ],
+  "json_keys": ["name", "is_name_exact", "hex", "rgb", "hsl", "hsv", "cmyk"],
+  
   // Width of the color box displayed in multi-color (list) view.
   "list_view_color_width": 20,
+  
   // Keys displayed in multi-color (list) view.
-  "list_view_keys": [
-    "name",
-    "hex",
-    "rgb",
-    "color",
-    "hsl",
-    "hsv",
-    "cmyk"
-  ],
+  "list_view_keys": ["name", "hex", "rgb", "color", "hsl", "hsv", "cmyk"],
+  
   // Always uppercase hex codes if set to true, lowercase if set to false.
   "uppercase_hex_codes": true
 }
@@ -200,19 +186,3 @@ color config edit  # Edit configuration via a text editor
 - Percent and degree unit symbols are omitted in JSON.
 - If HSV/HSL/CMYK values do not map exactly to an RGB triplet, they are rounded to the
   nearest one.
-
-## Contributing
-
-Set up dev environment:
-
-```shell
-cd ~/your/colorpedia/clone  # Activate venv if you have one (recommended)
-pip install -e .[dev]       # Install dev dependencies (black, mypy, pre-commit etc.)
-pre-commit install          # Install git pre-commit hooks
-```
-
-Run unit tests with coverage:
-
-```shell
-py.test --cov=colorpedia --cov-report=html
-```
