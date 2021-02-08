@@ -5,7 +5,7 @@ with open("docs/README.md") as fp:
 
 setup(
     name="colorpedia",
-    description="CLI for color lookups",
+    description="CLI for Color Lookups",
     long_description=description,
     long_description_content_type="text/markdown",
     author="Joohwan Oh",
@@ -43,12 +43,14 @@ setup(
         ],
     },
     classifiers=[
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
         "Intended Audience :: Developers",
-        "Natural Language :: English",
-        "Topic :: Utilities",
         "License :: OSI Approved :: MIT License",
+        "Natural Language :: English",
+        "Operating System :: MacOS",
+        "Operating System :: Microsoft :: Windows",
+        "Operating System :: Unix",
+        "Programming Language :: Python :: 3",
+        "Topic :: Documentation :: Sphinx",
+        "Topic :: Utilities",
     ],
 )
