@@ -143,7 +143,7 @@ def rgb_to_names(r: int, g: int, b: int) -> Tuple[Tuple[str, ...], bool]:
         return HEX_CODE_TO_NAMES[f"{r:02x}{g:02x}{b:02x}".upper()], True
     except KeyError:
         minimum_diff = maxsize
-        nearest_names: Tuple = tuple()
+        nearest_names: Tuple[str, ...] = tuple()
 
         for hex_code, names in HEX_CODE_TO_NAMES.items():
             _r, _g, _b = hex_to_rgb(hex_code)

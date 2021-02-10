@@ -1,4 +1,5 @@
 import dataclasses
+from typing import Any
 
 import pytest
 
@@ -6,14 +7,14 @@ from colorpedia.config import DEFAULT_SHADES_COUNT, JSON_KEYS, VIEW_KEYS, Config
 from colorpedia.exceptions import ConfigFileError, ConfigKeyError, ConfigValueError
 
 
-def test_config_update():
+def test_config_update() -> None:
     config = Config()
     config.update(config.dump())
     assert config == Config()
 
 
 @pytest.mark.parametrize("data", [True, max, None, [], ()])
-def test_config_update_bad_data_format(data):
+def test_config_update_bad_data_format(data: Any) -> None:
     config = Config()
     with pytest.raises(ConfigFileError) as err:
         # noinspection PyTypeChecker
@@ -22,7 +23,7 @@ def test_config_update_bad_data_format(data):
 
 
 @pytest.mark.parametrize("key", [f.name for f in dataclasses.fields(Config)])
-def test_config_update_bad_value(key):
+def test_config_update_bad_value(key: str) -> None:
     config = Config()
     with pytest.raises(ConfigValueError) as err:
         config.update({key: None})
@@ -30,14 +31,14 @@ def test_config_update_bad_value(key):
 
 
 @pytest.mark.parametrize("key", ["bad-" + f.name for f in dataclasses.fields(Config)])
-def test_config_update_bad_key(key):
+def test_config_update_bad_key(key: str) -> None:
     config = Config()
     with pytest.raises(ConfigKeyError) as err:
         config.update({key: None})
     assert str(err.value).startswith("Bad configuration key")
 
 
-def test_config_set_flag_json():
+def test_config_set_flag_json() -> None:
     config = Config()
     config.set_flags(json=False)
     assert config.always_output_json is False
@@ -47,7 +48,7 @@ def test_config_set_flag_json():
     assert config.always_output_json is True
 
 
-def test_config_set_flag_all():
+def test_config_set_flag_all() -> None:
     config = Config()
     view_keys = frozenset(("name", "hex"))
     config.get_view_keys = view_keys
@@ -70,7 +71,7 @@ def test_config_set_flag_all():
     assert config.json_keys == JSON_KEYS
 
 
-def test_config_set_flag_units():
+def test_config_set_flag_units() -> None:
     config = Config()
     config.set_flags(units=False)
     assert config.display_degree_symbol is False
@@ -82,7 +83,7 @@ def test_config_set_flag_units():
     assert config.display_percent_symbol is True
 
 
-def test_config_set_flag_shades():
+def test_config_set_flag_shades() -> None:
     config = Config()
     config.set_flags(shades=True)
     assert config.default_shades_count == DEFAULT_SHADES_COUNT

@@ -32,7 +32,7 @@ custom_config.set_flags(units=True)
         (1.000, 1.000, 1.000, 1.000, "C:100 M:100 Y:100 K:100"),
     ),
 )
-def test_format_cmyk(c, m, y, k, expected):
+def test_format_cmyk(c: float, m: float, y: float, k: float, expected: str) -> None:
     assert format_cmyk(default_config, c, m, y, k) == expected
 
 
@@ -45,7 +45,9 @@ def test_format_cmyk(c, m, y, k, expected):
         (1.000, 1.000, 1.000, 1.000, "C:100% M:100% Y:100% K:100%"),
     ),
 )
-def test_format_cmyk_with_units(c, m, y, k, expected):
+def test_format_cmyk_with_units(
+    c: float, m: float, y: float, k: float, expected: str
+) -> None:
     assert format_cmyk(custom_config, c, m, y, k) == expected
 
 
@@ -58,7 +60,7 @@ def test_format_cmyk_with_units(c, m, y, k, expected):
         ("0F0F0F", "#0F0F0F"),
     ),
 )
-def test_format_hex(hex_code, expected):
+def test_format_hex(hex_code: str, expected: str) -> None:
     assert format_hex(default_config, hex_code) == expected
     assert format_hex(custom_config, hex_code) == expected.lower()
 
@@ -72,7 +74,7 @@ def test_format_hex(hex_code, expected):
         (1.0, 1.001, 1.001, "H:360 S:100 L:100"),
     ),
 )
-def test_format_hsl(h, s, l, expected):
+def test_format_hsl(h: float, s: float, l: float, expected: str) -> None:
     assert format_hsl(default_config, h, s, l) == expected
 
 
@@ -85,7 +87,7 @@ def test_format_hsl(h, s, l, expected):
         (1.0, 1.001, 1.001, "H:360° S:100% L:100%"),
     ),
 )
-def test_format_hsl_with_units(h, s, l, expected):
+def test_format_hsl_with_units(h: float, s: float, l: float, expected: str) -> None:
     assert format_hsl(custom_config, h, s, l) == expected
 
 
@@ -98,7 +100,7 @@ def test_format_hsl_with_units(h, s, l, expected):
         (1.0, 1.001, 1.001, "H:360 S:100 V:100"),
     ),
 )
-def test_format_hsv(h, s, v, expected):
+def test_format_hsv(h: float, s: float, v: float, expected: str) -> None:
     assert format_hsv(default_config, h, s, v) == expected
 
 
@@ -111,7 +113,7 @@ def test_format_hsv(h, s, v, expected):
         (1.0, 1.001, 1.001, "H:360° S:100% V:100%"),
     ),
 )
-def test_format_hsv_with_units(h, s, v, expected):
+def test_format_hsv_with_units(h: float, s: float, v: float, expected: str) -> None:
     assert format_hsv(custom_config, h, s, v) == expected
 
 
@@ -123,7 +125,7 @@ def test_format_hsv_with_units(h, s, v, expected):
         (255, 255, 255, "R:255 G:255 B:255"),
     ),
 )
-def test_format_rgb(r, g, b, expected):
+def test_format_rgb(r: int, g: int, b: int, expected: str) -> None:
     assert format_rgb(default_config, r, g, b) == expected
 
 
@@ -135,11 +137,11 @@ def test_format_rgb(r, g, b, expected):
         (255, 255, 255, "R:255  G:255  B:255 "),
     ),
 )
-def test_format_rgb_with_units(r, g, b, expected):
+def test_format_rgb_with_units(r: int, g: int, b: int, expected: str) -> None:
     assert format_rgb(custom_config, r, g, b) == expected
 
 
-def test_format_name():
+def test_format_name() -> None:
     assert format_name(default_config, "foo", False) == "foo~"
     assert format_name(default_config, "foo", True) == "foo"
     assert format_name(custom_config, "foo", False) == "foo*"
@@ -147,7 +149,7 @@ def test_format_name():
 
 
 @pytest.mark.parametrize(("r", "g", "b"), ((0, 0, 0), (10, 20, 30), (255, 255, 255)))
-def test_get_view(r, g, b):
+def test_get_view(r: int, g: int, b: int) -> None:
     color = Color(r, g, b)
 
     view = format_get_view(default_config, color)
@@ -168,7 +170,7 @@ def test_get_view(r, g, b):
 
 
 @pytest.mark.parametrize(("r", "g", "b"), ((0, 0, 0), (10, 20, 30), (255, 255, 255)))
-def test_list_view(r, g, b):
+def test_list_view(r: int, g: int, b: int) -> None:
     color = Color(r, g, b)
 
     view = format_list_view(default_config, color)

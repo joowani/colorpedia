@@ -1,3 +1,6 @@
+from typing import Optional
+
+
 class ColorpediaError(Exception):
     """Generic Colorpedia exception."""
 
@@ -5,7 +8,7 @@ class ColorpediaError(Exception):
 class ConfigFileError(ColorpediaError):
     """Configuration file cannot be accessed, created or updated."""
 
-    def __init__(self, msg, err: Exception = None):
+    def __init__(self, msg: str, err: Optional[Exception] = None):
         if isinstance(err, OSError):
             msg = f"{msg}: {err.strerror} (errno: {err.errno})"
         elif err:
@@ -32,5 +35,5 @@ class ConfigValueError(ColorpediaError):
 class InputValueError(ColorpediaError):
     """Invalid input value from user."""
 
-    def __init__(self, name: str, exp):
+    def __init__(self, name: str, exp: str):
         super(InputValueError, self).__init__(f"Bad {name} (expecting {exp})")

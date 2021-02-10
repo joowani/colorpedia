@@ -3,7 +3,7 @@ from typing import Tuple
 
 import pytest
 
-from colorpedia import (
+from colorpedia.converters import (
     cmyk_to_rgb,
     hex_to_rgb,
     hsl_to_rgb,
@@ -31,22 +31,22 @@ def sub_clamped(value: int) -> int:
 
 
 @pytest.mark.parametrize("rgb", RGB_VALS)
-def test_rgb_cmyk(rgb: Tuple[int, int, int]):
+def test_rgb_cmyk(rgb: Tuple[int, int, int]) -> None:
     assert cmyk_to_rgb(*rgb_to_cmyk(*rgb)) == rgb
 
 
 @pytest.mark.parametrize("rgb", RGB_VALS)
-def test_rgb_hex(rgb: Tuple[int, int, int]):
+def test_rgb_hex(rgb: Tuple[int, int, int]) -> None:
     assert hex_to_rgb(rgb_to_hex(*rgb)) == rgb
 
 
 @pytest.mark.parametrize("rgb", RGB_VALS)
-def test_rgb_hsl(rgb: Tuple[int, int, int]):
+def test_rgb_hsl(rgb: Tuple[int, int, int]) -> None:
     assert hsl_to_rgb(*rgb_to_hsl(*rgb)) == rgb
 
 
 @pytest.mark.parametrize("rgb", RGB_VALS)
-def test_rgb_hsv(rgb: Tuple[int, int, int]):
+def test_rgb_hsv(rgb: Tuple[int, int, int]) -> None:
     assert hsv_to_rgb(*rgb_to_hsv(*rgb)) == rgb
 
 
@@ -60,7 +60,7 @@ def test_rgb_hsv(rgb: Tuple[int, int, int]):
         HEX_CODE_TO_NAMES["9ACD32"][0],
     ),
 )
-def test_rgb_name(name: str):
+def test_rgb_name(name: str) -> None:
     r, g, b = name_to_rgb(name)
     names, is_name_exact_match = rgb_to_names(r, g, b)
     assert name in names
@@ -83,7 +83,7 @@ def test_rgb_name(name: str):
 
 
 @pytest.mark.parametrize("palette", ("red", "green", "blue"))
-def test_palette_to_rgbs(palette: str):
+def test_palette_to_rgbs(palette: str) -> None:
     rgb = name_to_rgb(palette)
     assert rgb in palette_to_rgbs(palette)
 
@@ -103,7 +103,7 @@ def test_palette_to_rgbs(palette: str):
         (1.0, 1.0, 1.0, 5),
     ),
 )
-def test_hsl_to_rgbs(h, s, l, shades_count):
+def test_hsl_to_rgbs(h: float, s: float, l: float, shades_count: int) -> None:
     rgbs = set(hsl_to_rgb_shades(h, s, l, shades_count))
     assert len(rgbs) == shades_count
     assert shades_count == 1 or (0, 0, 0) in rgbs

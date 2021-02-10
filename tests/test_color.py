@@ -3,7 +3,7 @@ import pytest
 from colorpedia.color import Color
 
 
-def test_color_black():
+def test_color_black() -> None:
     color = Color(0, 0, 0)
     assert color.name == "black"
     assert color.names == ("black",)
@@ -15,7 +15,7 @@ def test_color_black():
     assert color.hsv == (0, 0, 0)
 
 
-def test_color_dimgray():
+def test_color_dimgray() -> None:
     color = Color(100, 100, 100)
     assert color.name == "dimgray/dimgrey"
     assert color.names == ("dimgray", "dimgrey")
@@ -27,7 +27,7 @@ def test_color_dimgray():
     assert color.hsv == (0.0, 0.0, 0.39215686274509803)
 
 
-def test_color_darkslateblue():
+def test_color_darkslateblue() -> None:
     color = Color(50, 100, 150)
     assert color.name == "darkslateblue"
     assert color.names == ("darkslateblue",)
@@ -52,7 +52,7 @@ def test_color_darkslateblue():
     )
 
 
-def test_color_white():
+def test_color_white() -> None:
     color = Color(255, 255, 255)
     assert color.name == "white"
     assert color.names == ("white",)
@@ -68,7 +68,7 @@ def test_color_white():
     ("r", "g", "b", "shades_count"),
     ((0, 0, 0, 1), (30, 40, 50, 1), (30, 40, 50, 5), (255, 255, 255, 5)),
 )
-def test_color_get_shades(r, g, b, shades_count):
+def test_color_get_shades(r: int, g: int, b: int, shades_count: int) -> None:
     color = Color(r, g, b)
     colors = set(color.get_shades(shades_count))
     assert len(colors) == shades_count
@@ -77,7 +77,7 @@ def test_color_get_shades(r, g, b, shades_count):
 
 
 @pytest.mark.parametrize(("r", "g", "b"), ((0, 0, 0), (10, 20, 30), (255, 255, 255)))
-def test_color_to_dict(r, g, b):
+def test_color_to_dict(r: int, g: int, b: int) -> None:
     color = Color(r, g, b)
 
     assert color.get_dict(set()) == {}

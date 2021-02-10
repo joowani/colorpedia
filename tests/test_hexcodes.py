@@ -3,7 +3,7 @@ import re
 from colorpedia.hexcodes import HEX_CODE_TO_NAMES, HEX_REGEX, NAME_TO_HEX_CODE
 
 
-def test_hex_codes():
+def test_hex_codes() -> None:
     for hex_code, names in HEX_CODE_TO_NAMES.items():
         assert isinstance(names, tuple)
         assert isinstance(hex_code, str)

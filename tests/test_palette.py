@@ -1,7 +1,7 @@
 from colorpedia.palettes import PALETTES
 
 
-def test_palette():
+def test_palette() -> None:
     for name, hex_codes in PALETTES.items():
         assert isinstance(name, str)
         assert name.islower()

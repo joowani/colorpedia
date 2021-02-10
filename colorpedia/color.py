@@ -17,7 +17,7 @@ class Color:
     g: int
     b: int
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         self.rgb = (self.r, self.g, self.b)
         self.names, self.is_name_exact = rgb_to_names(*self.rgb)
         self.name = "/".join(self.names)
@@ -30,8 +30,8 @@ class Color:
         h, s, l = self.hsl
         return (Color(*rgb) for rgb in hsl_to_rgb_shades(h, s, l, size))
 
-    def get_dict(self, keys: Union[FrozenSet, Set]) -> Dict[str, Any]:
-        result = {}
+    def get_dict(self, keys: Union[FrozenSet[str], Set[str]]) -> Dict[str, Any]:
+        result: Dict[str, Any] = {}
         if "hex" in keys:
             result["hex"] = self.hex
         if "rgb" in keys:

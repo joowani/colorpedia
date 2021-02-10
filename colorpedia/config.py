@@ -42,20 +42,20 @@ class Config:
         if type(data) != dict:
             raise ConfigFileError("Bad JSON: expecting an object")
 
-        def validate_string(name):
+        def validate_string(name: str) -> None:
             if type(getattr(self, name)) != str:
                 raise ConfigValueError(name, "a string")
 
-        def validate_boolean(name):
+        def validate_boolean(name: str) -> None:
             if type(getattr(self, name)) != bool:
                 raise ConfigValueError(name, "true or false")
 
-        def validate_number(name):
+        def validate_number(name: str) -> None:
             value = getattr(self, name)
             if not (type(value) == int and 1 <= value <= 100):
                 raise ConfigValueError(name, "an integer between 1 and 100")
 
-        def validate_view_keys(name):
+        def validate_view_keys(name: str) -> None:
             keys = getattr(self, name)
             if not (
                 type(keys) in (list, frozenset)
@@ -66,7 +66,7 @@ class Config:
                     name, f"non-empty array of strings in {list(VIEW_KEYS)}"
                 )
 
-        def validate_json_keys(name):
+        def validate_json_keys(name: str) -> None:
             keys = getattr(self, name)
             if not (
                 type(keys) in (list, frozenset)
@@ -179,7 +179,7 @@ def init_config_file() -> Config:  # pragma: no cover
         return config
 
 
-def edit_config_file(editor: str = None):  # pragma: no cover
+def edit_config_file(editor: Optional[str] = None) -> Config:  # pragma: no cover
     editor = editor or os.environ.get("VISUAL") or os.environ.get("EDITOR")
     if editor:
         editor = shlex.split(editor)[0]  # Prevent arbitrary code execution

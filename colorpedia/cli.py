@@ -2,7 +2,7 @@ import os
 import sys
 from distutils.util import strtobool
 from json import dumps as json_dumps
-from typing import Callable, Iterable, Optional
+from typing import Any, Callable, Dict, Iterable, Optional
 
 from fire import Fire
 from pkg_resources import get_distribution
@@ -48,7 +48,7 @@ def prompt_user(question: str) -> bool:
             print('Please respond with "y" or "n"\n')
 
 
-def print_colors(config: Config, colors: Iterable[Color]):
+def print_colors(config: Config, colors: Iterable[Color]) -> None:
     if config.always_output_json:
         print(json_dumps([c.get_dict(config.json_keys) for c in colors]))
     else:
@@ -56,7 +56,7 @@ def print_colors(config: Config, colors: Iterable[Color]):
             print(format_list_view(config, color))
 
 
-def print_color(config: Config, color: Color):
+def print_color(config: Config, color: Color) -> None:
     if config.default_shades_count:
         print_colors(config, color.get_shades(config.default_shades_count))
 
@@ -66,11 +66,11 @@ def print_color(config: Config, color: Color):
         print(format_get_view(config, color))
 
 
-def print_config(config: Config, sort: bool = True, indent: int = 2):
+def print_config(config: Config, sort: bool = True, indent: int = 2) -> None:
     print(json_dumps(config.dump(), sort_keys=sort, indent=indent))
 
 
-def get_version(json: Optional[bool] = None):
+def get_version(json: Optional[bool] = None) -> None:
     """Display Colorpedia CLI version.
 
     Colorpedia follows Semantic Versioning 2.0.0 (semver.org).
@@ -82,7 +82,7 @@ def get_version(json: Optional[bool] = None):
     print({"version": version} if json else version)
 
 
-def init_config(force: bool = False):
+def init_config(force: bool = False) -> None:
     """Initialize or reset Colorpedia configuration.
 
     Configuration file is located at ~/.config/colorpedia/config.json.
@@ -97,7 +97,7 @@ def init_config(force: bool = False):
     print_config(init_config_file())
 
 
-def show_config(sort: bool = True, indent: int = 2):
+def show_config(sort: bool = True, indent: int = 2) -> None:
     """Display Colorpedia configuration.
 
     Configuration file is located at ~/.config/colorpedia/config.json.
@@ -114,7 +114,7 @@ def show_config(sort: bool = True, indent: int = 2):
         print_config(config, sort=sort, indent=indent)
 
 
-def edit_config(editor: str = None):
+def edit_config(editor: Optional[str] = None) -> None:
     """Edit Colorpedia configuration using a text editor.
 
     If --editor flag is not specified, $VISUAL and $EDITOR environment
@@ -132,12 +132,12 @@ def edit_config(editor: str = None):
         print_config(config)
 
 
-def get_palette_func(name: str) -> Callable:
+def get_palette_func(name: str) -> Callable[..., None]:
     def function(
         json: Optional[bool] = None,
         all: bool = False,
         units: Optional[bool] = None,
-    ):
+    ) -> None:
         config = load_config_file()
         config.set_flags(
             json=validate_boolean_flag(json),
@@ -157,13 +157,13 @@ def get_palette_func(name: str) -> Callable:
     return function
 
 
-def get_color_by_name_func(name: str, hex_code: str) -> Callable:
+def get_color_by_name_func(name: str, hex_code: str) -> Callable[..., None]:
     def function(
         shades: int = 0,
         json: Optional[bool] = None,
         all: bool = False,
         units: Optional[bool] = None,
-    ):
+    ) -> None:
         config = load_config_file()
         config.set_flags(
             shades=validate_shades_count(shades),
@@ -194,7 +194,7 @@ def get_color_by_cmyk(
     json: Optional[bool] = None,
     all: bool = False,
     units: Optional[bool] = None,
-):
+) -> None:
     """Look up colors by CMYK (Cyan Magenta Yellow Black) values.
 
     CMYK is a subtractive color model used in color printing. It refers
@@ -236,7 +236,7 @@ def get_color_by_hex(
     json: Optional[bool] = None,
     all: bool = False,
     units: Optional[bool] = None,
-):
+) -> None:
     """Look up colors by hexadecimal (web) code.
 
     The hexadecimal code must be specified without the hash (#) prefix
@@ -273,7 +273,7 @@ def get_color_by_hsl(
     json: Optional[bool] = None,
     all: bool = False,
     units: Optional[bool] = None,
-):
+) -> None:
     """Look up colors by HSL (Hue Saturation Lightness) values.
 
     Hue is a point on the color wheel from 0 to 360 where 0 is red,
@@ -316,7 +316,7 @@ def get_color_by_hsv(
     json: Optional[bool] = None,
     all: bool = False,
     units: Optional[bool] = None,
-):
+) -> None:
     """Look up colors by HSV (Hue Saturation Brightness/Value) values.
 
     Hue is a point on the color wheel from 0 to 360 where 0 is red,
@@ -360,7 +360,7 @@ def get_color_by_rgb(
     json: Optional[bool] = None,
     all: bool = False,
     units: Optional[bool] = None,
-):
+) -> None:
     """Look up colors by RGB (Red Green Blue) values.
 
     RGB is an additive color model where red, green, and blue lights are
@@ -394,7 +394,7 @@ def get_color_by_rgb(
     print_color(config, Color(r, g, b))
 
 
-class MainCommand(dict):
+class MainCommand(Dict[str, Any]):
     """Colorpedia CLI.
 
     Look up colors using various models:
@@ -427,19 +427,19 @@ class MainCommand(dict):
     """
 
 
-class NameSubCommand(dict):
+class NameSubCommand(Dict[str, Any]):
     """Look up colors by CSS3 name."""
 
 
-class PaletteSubCommand(dict):
+class PaletteSubCommand(Dict[str, Any]):
     """Look up color palettes."""
 
 
-class ConfigSubCommand(dict):
+class ConfigSubCommand(Dict[str, Any]):
     """Manage CLI configuration."""
 
 
-def entry_point(name: str):
+def entry_point(name: str) -> None:
     try:
         # We need this to get colors working on windows.
         os.system("")
@@ -479,9 +479,9 @@ def entry_point(name: str):
         sys.exit(1)
 
 
-def entry_point_color():
+def entry_point_color() -> None:
     entry_point("color")
 
 
-def entry_point_colorpedia():
+def entry_point_colorpedia() -> None:
     entry_point("colorpedia")

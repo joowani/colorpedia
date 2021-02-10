@@ -6,7 +6,7 @@ from colorpedia.exceptions import (
 )
 
 
-def test_config_file_error():
+def test_config_file_error() -> None:
     error = ConfigFileError("A")
     assert str(error) == "A"
 
@@ -17,16 +17,16 @@ def test_config_file_error():
     assert str(error) == "A: B"
 
 
-def test_config_key_error():
+def test_config_key_error() -> None:
     error = ConfigKeyError("A")
     assert str(error) == 'Bad configuration key "A"'
 
 
-def test_config_value_error():
+def test_config_value_error() -> None:
     error = ConfigValueError("A", "B")
     assert str(error) == 'Bad value for configuration key "A" (expecting B)'
 
 
-def test_input_error():
+def test_input_error() -> None:
     error = InputValueError("A", "B")
     assert str(error) == "Bad A (expecting B)"
