@@ -35,7 +35,7 @@ jobs:
       - name: Run mypy
         run: mypy .
       - name: Run pytest
-        run: py.test --cov=./ --cov-report=xml
+        run: py.test --cov=colorpedia --cov-report=xml
       - name: Run color
         run: |
           color version

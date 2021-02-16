@@ -10,7 +10,6 @@ build-backend = "setuptools.build_meta"
 omit = [
     "colorpedia/cli.py",
     "colorpedia/version.py",
-    "setup.py"
 ]
 
 [tool.isort]
