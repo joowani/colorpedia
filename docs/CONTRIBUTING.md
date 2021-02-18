@@ -10,7 +10,7 @@ pre-commit install         # Install git pre-commit hooks
 Run unit tests with coverage:
 
 ```shell
-py.test --cov=./ --cov-report=html  # Open htmlcov/index.html in your browser
+py.test --cov=colorpedia --cov-report=html  # Open htmlcov/index.html in your browser
 ```
 
 Build and test documentation (Colorpedia uses [MkDocs](https://www.mkdocs.org)):
