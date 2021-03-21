@@ -133,9 +133,6 @@ def test_normalize_degree_angle_bad_arg(bad_arg: Any) -> None:
         ("100", "110000"),
         ("010", "001100"),
         ("001", "000011"),
-        (212121, "212121"),
-        (100, "110000"),
-        (0, "000000"),
     ),
 )
 def test_normalize_hex_code(arg: Any, expected: str) -> None:

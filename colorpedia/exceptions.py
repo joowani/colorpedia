@@ -8,32 +8,30 @@ class ColorpediaError(Exception):
 class ConfigFileError(ColorpediaError):
     """Configuration file cannot be accessed, created or updated."""
 
-    def __init__(self, msg: str, err: Optional[Exception] = None):
+    def __init__(self, message: str, err: Optional[Exception] = None):
         if isinstance(err, OSError):
-            msg = f"{msg}: {err.strerror} (errno: {err.errno})"
+            message = f"{message}: {err.strerror} (errno: {err.errno})"
         elif err:
-            msg = f"{msg}: {err}"
-        super(ConfigFileError, self).__init__(msg)
+            message = f"{message}: {err}"
+        super().__init__(message)
 
 
 class ConfigKeyError(ColorpediaError):
     """Configuration key is invalid."""
 
     def __init__(self, key: str):
-        super(ConfigKeyError, self).__init__(f'Bad configuration key "{key}"')
+        super().__init__(f'Bad configuration key "{key}"')
 
 
 class ConfigValueError(ColorpediaError):
     """Configuration value is invalid."""
 
     def __init__(self, key: str, exp: str):
-        super(ConfigValueError, self).__init__(
-            f'Bad value for configuration key "{key}" (expecting {exp})'
-        )
+        super().__init__(f'Bad value for configuration key "{key}" (expecting {exp})')
 
 
 class InputValueError(ColorpediaError):
     """Invalid input value from user."""
 
     def __init__(self, name: str, exp: str):
-        super(InputValueError, self).__init__(f"Bad {name} (expecting {exp})")
+        super().__init__(f"Bad {name} (expecting {exp})")

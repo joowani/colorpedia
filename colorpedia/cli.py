@@ -440,11 +440,18 @@ class ConfigSubCommand(Dict[str, Any]):
 
 
 def entry_point(name: str) -> None:
+    # Workaround for python-fire's argument parsing
+    args = sys.argv[1:]
+    if args and args[0] == "hex":
+        for i in range(1, len(args)):
+            if not args[i].startswith("-"):
+                args[i] = f'"{args[i]}"'
     try:
         # We need this to get colors working on windows.
         os.system("")
         Fire(
             name=name,
+            command=args,
             component=MainCommand(
                 {
                     "version": get_version,

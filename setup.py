@@ -1,12 +1,12 @@
 from setuptools import find_packages, setup
 
 with open("docs/README.md") as fp:
-    description = fp.read()
+    long_description = fp.read()
 
 setup(
     name="colorpedia",
     description="CLI for Color Lookups",
-    long_description=description,
+    long_description=long_description,
     long_description_content_type="text/markdown",
     author="Joohwan Oh",
     author_email="joohwan.oh@outlook.com",

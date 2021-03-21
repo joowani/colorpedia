@@ -2,7 +2,6 @@ import os
 import shlex
 import shutil
 import subprocess
-import sys
 from dataclasses import dataclass
 from json import dump as json_dump
 from json import load as json_load
@@ -183,7 +182,7 @@ def edit_config_file(editor: Optional[str] = None) -> Config:  # pragma: no cove
     editor = editor or os.environ.get("VISUAL") or os.environ.get("EDITOR")
     if editor:
         editor = shlex.split(editor)[0]  # Prevent arbitrary code execution
-    elif sys.platform.startswith("win"):
+    elif os.name == "nt":
         editor = "notepad"
     else:
         editor = "vi"
