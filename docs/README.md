@@ -8,7 +8,7 @@ HEX, RGB, HSL, HSV, CMYK.
 ![Demo GIF](https://raw.githubusercontent.com/joowani/colorpedia/main/demo.gif)
 ![Build](https://github.com/joowani/colorpedia/workflows/Build/badge.svg?branch=main)
 ![CodeQL](https://github.com/joowani/colorpedia/workflows/CodeQL/badge.svg)
-[![Codecov](https://codecov.io/gh/joowani/colorpedia/branch/main/graph/badge.svg?token=EH6F62KWTB)](https://codecov.io/gh/joowani/colorpedia)
+[![codecov](https://codecov.io/gh/joowani/colorpedia/branch/main/graph/badge.svg?token=5GzlmQG4wS)](https://codecov.io/gh/joowani/colorpedia)
 [![PyPI version](https://badge.fury.io/py/colorpedia.svg)](https://badge.fury.io/py/colorpedia)
 [![GitHub license](https://img.shields.io/github/license/joowani/colorpedia?color=brightgreen)](https://github.com/joowani/colorpedia/blob/main/LICENSE)
 ![Python version](https://img.shields.io/badge/python-3.6%2B-blue)
