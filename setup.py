@@ -34,6 +34,8 @@ setup(
             "pre-commit>=2.9.3",
             "pytest>=6.0.0",
             "pytest-cov>=2.0.0",
+            "types-dataclasses",
+            "types-setuptools",
         ],
     },
     entry_points={
