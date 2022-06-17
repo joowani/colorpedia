@@ -180,7 +180,7 @@ color config edit  # Edit configuration via a text editor
   ```
   delta = (R1 - R2) ^ 2 + (G1 - G2) ^ 2 + (B1 - B2) ^ 2
   ```
-  If there is are ties, all names are included in the output.
+  If there are ties, all names are included in the output.
 - Percentage values use 0 - 100 scale by default, 0 - 1 scale in JSON.
 - Degree angles use 0 - 360 scale by default, 0 - 1 scale in JSON.
 - Percent and degree unit symbols are omitted in JSON.
